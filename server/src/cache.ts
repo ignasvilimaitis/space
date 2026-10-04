@@ -2,7 +2,7 @@ let horizonsQueue: Promise<unknown> = Promise.resolve();
 
 
 const cache = new Map<string, { promise: Promise<any>; expires: number }>();
-const DEFAULT_TTL_MS = 60 * 60 * 1000; // 1 hour; use Infinity if queries are fixed-date
+const DEFAULT_TTL_MS = 60 * 60 * 1000; // 
 
 export function queuedFetch(url: string, ttlMs = DEFAULT_TTL_MS): Promise<any> {
     const cached = cache.get(url);

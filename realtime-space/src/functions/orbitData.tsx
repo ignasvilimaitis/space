@@ -16,7 +16,7 @@ export function getOrbitCurve(planetData: any) {
         )
         return {
           curve: new CatmullRomCurve3(points, false, 'catmullrom'),
-          totalDays: (points.length - 1) * STEP_HOURS,
+          totalHours: (points.length - 1) * STEP_HOURS,
         }
       }, [planetData])
     
@@ -29,7 +29,7 @@ export function setPlanetPosition(planetOrbit: any, group: any) {
     useFrame((state) => {
       if (!group.current || !planetOrbit) return
       const days = state.clock.elapsedTime * HOURS_PER_SECOND
-      const u = (days / planetOrbit.totalDays) % 1
+      const u = (days / planetOrbit.totalHours) % 1
       planetOrbit.curve.getPoint(u, group.current.position) 
     }) 
 } catch (e) {

@@ -13,7 +13,8 @@ import { JupiterModel } from './components/models/jupiter'
 import { UranusModel } from './components/models/uranus'
 import { NeptuneModel } from './components/models/neptune'
 import { SaturnModel } from './components/models/saturn'
-import TimeControl, { useSimClock } from './components/menu/TimeControl'
+import TimeControl, { useSimClock } from './components/menu/timeControl'
+import { getCurrentClock } from './functions/convertDate'
 
 function App() {
 

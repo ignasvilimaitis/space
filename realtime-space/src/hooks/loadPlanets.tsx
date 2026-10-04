@@ -1,5 +1,6 @@
 // hooks/usePlanetaryData.ts
 import { useEffect, useState } from "react";
+import { getCurrentClock } from "../functions/convertDate";
 
 const PLANETS = ["mercury","venus","earth","mars","jupiter","saturn","uranus","neptune"];
 
@@ -8,6 +9,8 @@ export function loadAllPlanetaryData() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+    const currentDate = getCurrentClock();
+
   useEffect(() => {
     const fetchAll = async () => {
       setLoading(true);
@@ -15,7 +18,7 @@ export function loadAllPlanetaryData() {
       try {
         const entries = await Promise.all(
           PLANETS.map(async (planet) => {
-            const res = await fetch(`http://localhost:3000/api/get/${planet}`);
+            const res = await fetch(`http://localhost:3000/api/get/${planet}?startMs=${currentDate}&stopMs=2026-10-05 16:24:18&step_size=1h`);
             if (!res.ok) throw new Error(`Failed for ${planet}: ${res.status}`);
             const json = await res.json();
             return [planet, json] as const;

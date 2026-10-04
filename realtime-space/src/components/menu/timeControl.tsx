@@ -1,9 +1,5 @@
 import { useState, useRef, useEffect, useCallback, type MutableRefObject, type CSSProperties } from "react";
 
-/* ------------------------------------------------------------------ */
-/* Speed ladder: seconds of simulated time per real second.           */
-/* Edit freely. Negative values run time backwards.                   */
-/* ------------------------------------------------------------------ */
 export const SPEEDS: number[] = [
   -2592000, -604800, -86400, -3600, -60, -1,
   1, 60, 3600, 86400, 604800, 2592000,
@@ -99,10 +95,6 @@ export function useSimClock({ start = Date.now(), speed = 1, paused = false }: S
 
   return { time, timeRef, speed: speedState, paused: pausedState, setTime, setSpeed, setPaused };
 }
-
-/* ------------------------------------------------------------------ */
-/* TimeControl: the corner widget.                                    */
-/* ------------------------------------------------------------------ */
 interface TimeControlProps {
   clock: SimClock;
   corner?: Corner;
