@@ -15,17 +15,12 @@ import { NeptuneModel } from './components/models/neptune'
 import { SaturnModel } from './components/models/saturn'
 import TimeControl, { useSimClock } from './components/menu/timeControl'
 import { getCurrentClock } from './functions/convertDate'
+import { calculateWindow } from './functions/windowCalculation'
 
 function App() {
 
-  const {data: planetData, loading, error} = loadAllPlanetaryData();
+  calculateWindow();
   const clock = useSimClock()
-  if (loading) {
-    return <div>Loading planetary data...</div>;
-  } else if (error) {
-    return <div>Error loading planetary data: {error}</div>;
-  }
-
   return (
     <div className="app">
       <StarBackground/>
@@ -38,14 +33,14 @@ function App() {
   <OrbitControls />
   <Suspense fallback={null}>
     <SunModel scale={0.5} position={[0, 0, 0]} />
-    <EarthModel scale={0.01} position={[(planetData["earth"][0]["x"]/1000000), (planetData["earth"][0]["y"]/1000000), (planetData["earth"][0]["z"]/1000000)]} />
-    <MercuryModel scale = {0.01} position = {[(planetData["mercury"][0]["x"]/1000000), (planetData["mercury"][0]["y"]/1000000), (planetData["mercury"][0]["z"]/1000000)]}></MercuryModel>
-    <VenusModel scale = {0.01} position = {[(planetData["venus"][0]["x"]/1000000), (planetData["venus"][0]["y"]/1000000), (planetData["venus"][0]["z"]/1000000)]}></VenusModel>
-    <MarsModel scale = {0.01} position = {[(planetData["mars"][0]["x"]/1000000), (planetData["mars"][0]["y"]/1000000), (planetData["mars"][0]["z"]/1000000)]}></MarsModel>
-    <JupiterModel scale = {0.01} position = {[(planetData["jupiter"][0]["x"]/1000000), (planetData["jupiter"][0]["y"]/1000000), (planetData["jupiter"][0]["z"]/1000000)]}></JupiterModel>
-    <SaturnModel scale = {0.01} position = {[(planetData["saturn"][0]["x"]/1000000), (planetData["saturn"][0]["y"]/1000000), (planetData["saturn"][0]["z"]/1000000)]}></SaturnModel>
-    <UranusModel scale = {0.01} position = {[(planetData["uranus"][0]["x"]/1000000), (planetData["uranus"][0]["y"]/1000000), (planetData["uranus"][0]["z"]/1000000)]}></UranusModel>
-    <NeptuneModel scale = {0.01} position = {[(planetData["neptune"][0]["x"]/1000000), (planetData["neptune"][0]["y"]/1000000), (planetData["neptune"][0]["z"]/1000000)]}></NeptuneModel>
+    <EarthModel scale={0.01} />
+    <MercuryModel scale = {0.01}></MercuryModel>
+    <VenusModel scale = {0.01}></VenusModel>
+    <MarsModel scale = {0.01}></MarsModel>
+    <JupiterModel scale = {0.01}></JupiterModel>
+    <SaturnModel scale = {0.01} ></SaturnModel>
+    <UranusModel scale = {0.01}></UranusModel>
+    <NeptuneModel scale = {0.01} ></NeptuneModel>
   </Suspense>
 </Canvas>
     </div>

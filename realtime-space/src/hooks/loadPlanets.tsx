@@ -18,7 +18,8 @@ export function loadAllPlanetaryData() {
       try {
         const entries = await Promise.all(
           PLANETS.map(async (planet) => {
-            const res = await fetch(`http://localhost:3000/api/get/${planet}?startMs=${currentDate}&stopMs=2026-10-05 16:24:18&step_size=1h`);
+
+            const res = await fetch(`http://localhost:3000/api/get/${planet}?startMs=${currentDate}&stopMs=2027-02-05 16:24:18&step_size=1h`);
             if (!res.ok) throw new Error(`Failed for ${planet}: ${res.status}`);
             const json = await res.json();
             return [planet, json] as const;
@@ -32,7 +33,7 @@ export function loadAllPlanetaryData() {
       }
     };
     fetchAll();
-  }, []);
+  }, [currentDate]);
 
   return { data, loading, error };
 }

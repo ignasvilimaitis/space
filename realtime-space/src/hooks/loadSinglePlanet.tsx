@@ -14,7 +14,8 @@ export function loadPlanetaryData(planet: string) {
       setLoading(true);
       setError(null);
       try {
-            const res = await fetch(`http://localhost:3000/api/get/${planet}?startMs=${currentDate}&stopMs=2026-10-05 16:24:18&step_size=1h`);
+        //console.log(`Fetching data for ${planet} with startMs=${currentDate}`);
+        const res = await fetch(`http://localhost:3000/api/get/${planet}?startMs=${currentDate}&stopMs=2027-02-05 16:24:18&step_size=1h`);
         if (!res.ok) throw new Error(`Failed for ${planet}: ${res.status}`);
         const json = await res.json();
         setData(json);

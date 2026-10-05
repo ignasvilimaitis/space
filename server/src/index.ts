@@ -49,7 +49,7 @@ app.get('/api/get/:planet', async (req, res) => {
         STOP_TIME: `'${stopMs}'`,
         STEP_SIZE: "1h"
     }));
-
+    
     const parsedData = parseData(planetData.result, planetName);
     res.status(200).json(parsedData)
 

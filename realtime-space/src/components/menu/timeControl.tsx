@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback, type MutableRefObject, type CSSProperties } from "react";
+import { useState, useRef, useEffect, useCallback, type CSSProperties, type RefObject } from "react";
 
 export const SPEEDS: number[] = [
   -2592000, -604800, -86400, -3600, -60, -1,
@@ -28,8 +28,9 @@ export interface SimClock {
   /** Simulated time in ms since epoch (UTC). Updates ~10 Hz for React. */
   time: number;
   /** Exact simulated time, updated every frame. Read this in render loops. */
-  timeRef: MutableRefObject<number>;
+  timeRef: RefObject<number>;
   /** Simulated seconds per real second. Negative runs backwards. */
+  speedRef: RefObject<number>;
   speed: number;
   paused: boolean;
   setTime: (ms: number) => void;
@@ -93,7 +94,7 @@ export function useSimClock({ start = Date.now(), speed = 1, paused = false }: S
     setTimeState(ms);
   }, []);
 
-  return { time, timeRef, speed: speedState, paused: pausedState, setTime, setSpeed, setPaused };
+  return { time, timeRef, speedRef, speed: speedState, paused: pausedState, setTime, setSpeed, setPaused };
 }
 interface TimeControlProps {
   clock: SimClock;
