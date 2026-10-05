@@ -17,10 +17,14 @@ interface NeptuneGLTF extends GLTF {
     }
 }
 
-export function NeptuneModel(props: JSX.IntrinsicElements['group']) {
+type PlanetProps = JSX.IntrinsicElements['group'] & {
+  date: string
+}
+
+export function NeptuneModel({date, ...props} : PlanetProps) {
   const group = useRef<Group>(null)
   const { nodes, materials } = useGLTF('/neptune.glb') as unknown as NeptuneGLTF
-    const { data: neptuneData } = loadPlanetaryData('neptune')
+    const { data: neptuneData } = loadPlanetaryData('neptune', date)
   
     const orbit = getOrbitCurve(neptuneData)
   

@@ -20,10 +20,14 @@ interface UranusGLTF extends GLTF {
     }
 }
 
-export function UranusModel(props: JSX.IntrinsicElements['group']) {
+type PlanetProps = JSX.IntrinsicElements['group'] & {
+  date: string
+}
+
+export function UranusModel({date, ...props} : PlanetProps) {
     const group = useRef<Group>(null)
   const { nodes, materials } = useGLTF('/uranus.glb') as unknown as UranusGLTF
-  const {data: uranusData, loading, error} = loadPlanetaryData("uranus")
+  const {data: uranusData, loading, error} = loadPlanetaryData("uranus", date)
 
   const orbit = getOrbitCurve(uranusData)
   setPlanetPosition(orbit, group)

@@ -15,10 +15,14 @@ interface VenusGLTF extends GLTF {
     }
 }
 
-export function VenusModel(props: JSX.IntrinsicElements['group']) {
+type PlanetProps = JSX.IntrinsicElements['group'] & {
+  date: string
+}
+
+export function VenusModel({date, ...props} : PlanetProps) {
   const group = useRef<Group>(null)
   const { nodes, materials } = useGLTF('/venus.glb') as unknown as VenusGLTF;
-    const { data: venusData, loading, error} = loadPlanetaryData("venus")
+    const { data: venusData, loading, error} = loadPlanetaryData("venus", date)
     
     const orbit = getOrbitCurve(venusData)
 

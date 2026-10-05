@@ -1,12 +1,9 @@
-import { useSimClock } from "../components/menu/timeControl";
+import { useSimClock, type SimClock } from "../components/menu/timeControl";
 
 
-export function getCurrentClock() {
-  const currentClock = useSimClock();
-  const currentSetTime = currentClock.timeRef.current;
-
+export function getCurrentClock(clock: SimClock) {
+  const currentSetTime = clock.timeRef.current;
   const convertedTime = convertMsToDate(currentSetTime);
-
   return convertedTime;
 }
 

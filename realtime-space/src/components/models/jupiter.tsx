@@ -20,11 +20,15 @@ interface JupiterGLTF extends GLTF {
     
 }
 
-export function JupiterModel(props: JSX.IntrinsicElements['group']) {
+type PlanetProps = JSX.IntrinsicElements['group'] & {
+  date: string
+}
+
+export function JupiterModel({date, ...props} : PlanetProps) {
     const group = useRef<Group>(null)
   const { nodes, materials } = useGLTF('/jupiter.glb') as unknown as JupiterGLTF
 
-  const {data: jupiterData, loading, error} = loadPlanetaryData("jupiter")
+  const {data: jupiterData, loading, error} = loadPlanetaryData("jupiter", date)
   const orbit = getOrbitCurve(jupiterData)
   setPlanetPosition(orbit, group)
   return (

@@ -18,15 +18,19 @@ interface EarthGLTF extends GLTF {
   }
 }
 
+type PlanetProps = JSX.IntrinsicElements['group'] & {
+  date: string
+}
+
 const SCALE = 1 / 1_000_000   
 const STEP_HOURS = 1            
 const HOURS_PER_SECOND = 1        
 
-export function EarthModel(props: JSX.IntrinsicElements['group']) {
+export function EarthModel({date, ...props} : PlanetProps) {
   const group = useRef<Group>(null)
   const { nodes, materials, animations } = useGLTF('/earth.glb') as unknown as EarthGLTF
   const { actions } = useAnimations(animations, group)
-  const { data: earthData, loading, error} = loadPlanetaryData("earth");
+  const { data: earthData, loading, error} = loadPlanetaryData("earth", date);
 
   const orbit = getOrbitCurve(earthData)
 

@@ -17,10 +17,14 @@ interface MarsGLTF extends GLTF {
     }
 }
 
-export function MarsModel(props: JSX.IntrinsicElements['group']) {
+type PlanetProps = JSX.IntrinsicElements['group'] & {
+  date: string
+}
+
+export function MarsModel({date, ...props} : PlanetProps) {
   const group = useRef<Group>(null)
   const { nodes, materials } = useGLTF('/mars.glb') as unknown as MarsGLTF
-  const {data: marsData, loading, error} = loadPlanetaryData("mars")
+  const {data: marsData, loading, error} = loadPlanetaryData("mars", date)
 
   const orbit = getOrbitCurve(marsData)
   setPlanetPosition(orbit, group)

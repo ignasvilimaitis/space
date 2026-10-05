@@ -1,15 +1,16 @@
 // hooks/usePlanetaryData.ts
 import { useEffect, useState } from "react";
 import { getCurrentClock } from "../functions/convertDate";
+import type { SimClock } from "../components/menu/timeControl";
 
 const PLANETS = ["mercury","venus","earth","mars","jupiter","saturn","uranus","neptune"];
 
-export function loadAllPlanetaryData() {
+export function loadAllPlanetaryData(clock: SimClock) {
   const [data, setData] = useState<Record<string, any>>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-    const currentDate = getCurrentClock();
+    const currentDate = getCurrentClock(clock);
 
   useEffect(() => {
     const fetchAll = async () => {

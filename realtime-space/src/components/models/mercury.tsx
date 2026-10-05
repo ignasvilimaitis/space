@@ -19,11 +19,15 @@ interface MercuryGLTF extends GLTF {
     }
 }
 
+type PlanetProps = JSX.IntrinsicElements['group'] & {
+  date: string
+}
 
-export function MercuryModel(props: JSX.IntrinsicElements['group']) {
+
+export function MercuryModel({date, ...props} : PlanetProps) {
   const group = useRef<Group>(null)
   const { nodes, materials } = useGLTF('/mercury.glb') as unknown as MercuryGLTF
-  const { data: mercuryData } = loadPlanetaryData('mercury')
+  const { data: mercuryData } = loadPlanetaryData('mercury', date)
 
   const orbit = getOrbitCurve(mercuryData)
 

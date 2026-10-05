@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { getCurrentClock } from "../functions/convertDate";
+import type { SimClock } from "../components/menu/timeControl";
 
 
-export function loadPlanetaryData(planet: string) {
+export function loadPlanetaryData(planet: string, currentDate: string) {
   const [data, setData] = useState<Record<string, any>>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const currentDate = getCurrentClock();
 
   useEffect(() => {
     const fetchAll = async () => {

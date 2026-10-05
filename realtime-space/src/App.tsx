@@ -7,20 +7,22 @@ import { StarBackground } from './components/scene/StarBackground'
 import { EarthModel } from './components/models/earth'
 import { MercuryModel } from './components/models/mercury'
 import { VenusModel } from './components/models/venus'
-import { loadAllPlanetaryData } from './hooks/loadPlanets'
 import { MarsModel } from './components/models/mars'
 import { JupiterModel } from './components/models/jupiter'
 import { UranusModel } from './components/models/uranus'
 import { NeptuneModel } from './components/models/neptune'
 import { SaturnModel } from './components/models/saturn'
 import TimeControl, { useSimClock } from './components/menu/timeControl'
-import { getCurrentClock } from './functions/convertDate'
 import { calculateWindow } from './functions/windowCalculation'
+import { getCurrentClock } from './functions/convertDate'
 
 function App() {
 
-  calculateWindow();
   const clock = useSimClock()
+  calculateWindow(clock);
+  
+  const currentTime = getCurrentClock(clock)
+
   return (
     <div className="app">
       <StarBackground/>
@@ -33,14 +35,14 @@ function App() {
   <OrbitControls />
   <Suspense fallback={null}>
     <SunModel scale={0.5} position={[0, 0, 0]} />
-    <EarthModel scale={0.01} />
-    <MercuryModel scale = {0.01}></MercuryModel>
-    <VenusModel scale = {0.01}></VenusModel>
-    <MarsModel scale = {0.01}></MarsModel>
-    <JupiterModel scale = {0.01}></JupiterModel>
-    <SaturnModel scale = {0.01} ></SaturnModel>
-    <UranusModel scale = {0.01}></UranusModel>
-    <NeptuneModel scale = {0.01} ></NeptuneModel>
+    <EarthModel scale={0.01} date={currentTime} />
+    <MercuryModel scale={0.01} date={currentTime}></MercuryModel>
+    <VenusModel scale={0.01} date={currentTime}></VenusModel>
+    <MarsModel scale={0.01} date={currentTime}></MarsModel>
+    <JupiterModel scale={0.01} date={currentTime}></JupiterModel>
+    <SaturnModel scale={0.01} date={currentTime} ></SaturnModel>
+    <UranusModel scale={0.01} date={currentTime}></UranusModel>
+    <NeptuneModel scale={0.01} date={currentTime} ></NeptuneModel>
   </Suspense>
 </Canvas>
     </div>

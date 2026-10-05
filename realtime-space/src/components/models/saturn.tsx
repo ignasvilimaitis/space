@@ -22,11 +22,16 @@ interface SaturnGLTF extends GLTF {
     }
 }
 
-export function SaturnModel(props: JSX.IntrinsicElements['group']) {
+type PlanetProps = JSX.IntrinsicElements['group'] & {
+  date: string
+}
+
+
+export function SaturnModel({date, ...props} : PlanetProps) {
     const group = useRef<Group>(null)
   const { nodes, materials } = useGLTF('/saturn.glb') as unknown as SaturnGLTF
 
-  const {data: saturnData, loading, error} = loadPlanetaryData("saturn")
+  const {data: saturnData, loading, error} = loadPlanetaryData("saturn", date)
     const orbit = getOrbitCurve(saturnData)
     setPlanetPosition(orbit, group)
   return (
